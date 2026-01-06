@@ -56,7 +56,7 @@ fun NowPlayingMoviesScreen(
                         }
                     }
                 )
-                if(index >= moviesListState.nowPlayingMoviesList.size -1 && moviesListState.isLoading.not()){
+                if(index >= moviesListState.nowPlayingMoviesList.size -5 && moviesListState.isLoading.not()){
                     onEvent(MoviesListUiEvent.Paginate(Category.NOW_PLAYING), AppConstants.NOW_PLAYING_MOVIES_LIST_SCREEN)
 
                 }

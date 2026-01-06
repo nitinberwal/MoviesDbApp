@@ -59,7 +59,7 @@ fun PopularMoviesScreen(
                         }
                     }
                 )
-                if(moviesListState.popularMoviesList.indexOf(movie) >= moviesListState.popularMoviesList.size -1 && moviesListState.isLoading.not()){
+                if(moviesListState.popularMoviesList.indexOf(movie) >= moviesListState.popularMoviesList.size - 5 && moviesListState.isLoading.not()){
                     onEvent(MoviesListUiEvent.Paginate(Category.POPULAR), AppConstants.POPULAR_MOVIES_LIST_SCREEN)
 
                 }
