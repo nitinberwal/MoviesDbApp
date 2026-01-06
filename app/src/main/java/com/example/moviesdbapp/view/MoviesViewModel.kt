@@ -22,10 +22,10 @@ class MoviesViewModel(private val moviesRepository: MoviesRepository): ViewModel
     private var _movieListState = MutableStateFlow(MoviesListState())
     val movieListState: StateFlow<MoviesListState> = _movieListState.asStateFlow()
 
-    init {
-        getPopularMovies(false)
-        getNowPlayingMovies(false)
-    }
+//    init {
+//        getPopularMovies(false)
+//        getNowPlayingMovies(false)
+//    }
 
     fun onEvent(event: MoviesListUiEvent, currScreen:Int) {
         when (event) {
@@ -46,7 +46,7 @@ class MoviesViewModel(private val moviesRepository: MoviesRepository): ViewModel
     }
 
 
-    private fun getPopularMovies(forceFetchFromRemote: Boolean) {
+    fun getPopularMovies(forceFetchFromRemote: Boolean) {
         viewModelScope.launch {
             _movieListState.update {
                 it.copy(isLoading = true)
@@ -78,7 +78,7 @@ class MoviesViewModel(private val moviesRepository: MoviesRepository): ViewModel
         }
     }
 
-    private fun getNowPlayingMovies(forceFetchFromRemote: Boolean) {
+    fun getNowPlayingMovies(forceFetchFromRemote: Boolean) {
         viewModelScope.launch {
             _movieListState.update {
                 it.copy(isLoading = true)

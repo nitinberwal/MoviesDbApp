@@ -55,11 +55,11 @@ fun MovieItemUI(
     val savedIconState = remember { mutableStateOf(Icons.Rounded.StarBorder) }
     val context = LocalContext.current
 
-    val imageState = rememberAsyncImagePainter(
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(MoviesApi.IMAGE_BASE_URL + "${movie?.poster_path ?: ""}")
-            .size(Size.ORIGINAL).build()
-    ).state
+//    val imageState = rememberAsyncImagePainter(
+//        model = ImageRequest.Builder(LocalContext.current)
+//            .data(MoviesApi.IMAGE_BASE_URL + "${movie?.poster_path ?: ""}")
+//            .size(Size.ORIGINAL).build()
+//    ).state
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -74,27 +74,28 @@ fun MovieItemUI(
             modifier = Modifier.padding(12.dp)
         ) {
 
-            if (imageState is AsyncImagePainter.State.Error) {
-                Image(
-                    painter = painterResource(R.drawable.movies_placeholder),
-                    contentScale = ContentScale.Fit,
-                    contentDescription = "movies placeholder",
-                    modifier = Modifier
-                        .width(120.dp)
-                        .height(160.dp)
-                )
-            } else {
-                // Poster Image
-                AsyncImage(
-                    model = MoviesApi.IMAGE_BASE_URL + "${movie?.poster_path ?: ""}",
-                    contentDescription = movie?.title ?: "",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .width(120.dp)
-                        .height(160.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                )
-            }
+//            if (imageState is AsyncImagePainter.State.Error) {
+//                Image(
+//                    painter = painterResource(R.drawable.movies_placeholder),
+//                    contentScale = ContentScale.Fit,
+//                    contentDescription = "movies placeholder",
+//                    modifier = Modifier
+//                        .width(120.dp)
+//                        .height(160.dp)
+//                )
+//            }
+//            else {
+//                // Poster Image
+//                AsyncImage(
+//                    model = MoviesApi.IMAGE_BASE_URL + "${movie?.poster_path ?: ""}",
+//                    contentDescription = movie?.title ?: "",
+//                    contentScale = ContentScale.Crop,
+//                    modifier = Modifier
+//                        .width(120.dp)
+//                        .height(160.dp)
+//                        .clip(RoundedCornerShape(8.dp))
+//                )
+//            }
 
             Spacer(modifier = Modifier.width(12.dp))
 

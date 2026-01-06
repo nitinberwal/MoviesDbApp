@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -67,15 +68,8 @@ fun SavedMoviesScreen(
                     navHostController,
                     moviesViewModel,
                     onItemClick = { clickedMovie ->
-                        moviesListState.savedMoviesList = moviesListState.savedMoviesList.map {
-                            if (it?.id == clickedMovie.id) {
-                                it?.copy(isSaved = !it.isSaved)
-                            } else it
-                        }
+                        savedMoviesViewModel.getSavedMovies()
                     })
-//                if(index >= savedMoviesState.movieList.size -1 && savedMoviesState.isLoading.not()){
-//                    onEvent(MoviesListUiEvent.Paginate(Category.POPULAR))
-//                }
             }
         }
     }
