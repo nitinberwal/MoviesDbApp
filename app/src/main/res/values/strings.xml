@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MoviesDbApp</string>
+    <string name="popularMovies">Popular Movies</string>
+    <string name="nowPlayingMovie">Now Playing Movies</string>
+    <string name="savedMovies">Saved Movies</string>
+    <string name="searchMovies">Search Movies</string>
+    <string name="popular">Popular</string>
+    <string name="nowPlaying">Now Playing</string>
+    <string name="search">Search</string>
+    <string name="saved">Saved</string>
 </resources>

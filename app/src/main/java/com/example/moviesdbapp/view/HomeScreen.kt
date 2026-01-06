@@ -27,12 +27,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.getString
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.moviesdbapp.R
 import com.example.moviesdbapp.savedMovies.presentation.SavedMoviesScreen
 import com.example.moviesdbapp.savedMovies.presentation.SavedMoviesViewModel
 import com.example.moviesdbapp.searchMovies.view.SearchMoviesScreen
@@ -55,10 +58,13 @@ fun HomeScreen(
         BottomNavigationBar(bottomNavController, moviesViewModel::onEvent)
     }, topBar = {
         TopAppBar(title = {
-            Text(text = if(movieState.value.currentScreen == AppConstants.POPULAR_MOVIES_LIST_SCREEN) "Popular Movies"
-            else if(movieState.value.currentScreen == AppConstants.NOW_PLAYING_MOVIES_LIST_SCREEN) "Now Playing Movies"
-                else if(movieState.value.currentScreen == AppConstants.SAVED_MOVIES_LIST_SCREEN) "Saved Movies"
-                else "Search Movies",
+            Text(text = if(movieState.value.currentScreen == AppConstants.POPULAR_MOVIES_LIST_SCREEN) getString(
+                LocalContext.current, R.string.popularMovies)
+            else if(movieState.value.currentScreen == AppConstants.NOW_PLAYING_MOVIES_LIST_SCREEN) getString(
+                LocalContext.current, R.string.nowPlayingMovie)
+                else if(movieState.value.currentScreen == AppConstants.SAVED_MOVIES_LIST_SCREEN) getString(
+                LocalContext.current, R.string.savedMovies)
+                else getString(LocalContext.current, R.string.searchMovies),
                 fontSize = 24.sp)
         }, modifier = Modifier.shadow(2.dp), colors = TopAppBarDefaults.topAppBarColors(
             MaterialTheme.colorScheme.inverseOnSurface)
@@ -87,10 +93,10 @@ fun HomeScreen(
 @Composable
     fun BottomNavigationBar(bottomNavController: NavHostController, onEvent: (MoviesListUiEvent, currScreen:Int) -> Unit){
         val items = listOf<BottomItem>(
-            BottomItem("Popular", Icons.Rounded.Movie),
-            BottomItem("Now Playing", Icons.Rounded.PlayCircle),
-            BottomItem("Search", Icons.Rounded.Search),
-            BottomItem("Saved", Icons.Rounded.SaveAlt)
+            BottomItem(getString(LocalContext.current, R.string.popular), Icons.Rounded.Movie),
+            BottomItem(getString(LocalContext.current, R.string.nowPlaying), Icons.Rounded.PlayCircle),
+            BottomItem(getString(LocalContext.current, R.string.search), Icons.Rounded.Search),
+            BottomItem(getString(LocalContext.current, R.string.saved), Icons.Rounded.SaveAlt)
         )
 
         val selected = rememberSaveable {

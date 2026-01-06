@@ -38,7 +38,7 @@ val networkModule = module {
 
 fun provideRetrofitInstance(okHttpClient: OkHttpClient): Retrofit {
     val gson = GsonBuilder().setLenient().create()
-    return Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/movie/")
+    return Retrofit.Builder().baseUrl(MoviesApi.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(okHttpClient).build()
 }

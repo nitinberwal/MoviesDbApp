@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -40,7 +41,13 @@ fun SearchMoviesScreen(
     val searchMoviesState = searchMoviesViewModel.searchMoviesState.collectAsState().value
 
 
-    LazyColumn() {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFF5F5F5)),
+        contentPadding = PaddingValues(12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
         item {
             TextField(
                 modifier = Modifier
@@ -58,11 +65,11 @@ fun SearchMoviesScreen(
                 modifier = Modifier
                     .padding(top = 12.dp, start = 12.dp, end = 12.dp)
                     .fillMaxWidth()
-                    .height(32.dp)
+                    .height(40.dp)
                     .background(color = Color.Blue, shape = RoundedCornerShape(12.dp))
                     .clickable {
                         if (searchText.value.isEmpty().not()) {
-                            searchMoviesViewModel.getSearchMoviesResults(searchText.value)
+                            searchMoviesViewModel.getSearchMoviesResults(searchText.value.replace(' ', '+'))
                         } else {
                             Toast.makeText(context, "Please enter movie name", Toast.LENGTH_SHORT)
                         }
@@ -72,19 +79,19 @@ fun SearchMoviesScreen(
             }
         }
 
-        if (searchMoviesState.movieList?.isNullOrEmpty() == true && searchText.value.isNotEmpty()) {
+        if (searchMoviesState.isLoading && searchText.value.isNotEmpty()) {
             item {
                 Box(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize().padding(top = 32.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     CircularProgressIndicator()
                 }
             }
         } else {
-            items(searchMoviesState.movieList.size) { index ->
+            items(items = searchMoviesState.movieList, key = { movie -> movie?.id?:-1 }) { movie ->
                 MovieItemUI(
-                    searchMoviesState.movieList[index],
+                    movie,
                     navHostController,
                     moviesViewModel,
                     onItemClick = { })

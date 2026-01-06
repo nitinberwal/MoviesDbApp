@@ -10,6 +10,8 @@ class AppConstants {
         const val SAVED_MOVIES_LIST_SCREEN = NOW_PLAYING_MOVIES_LIST_SCREEN + 1
         const val SEARCH_SCREEN = SAVED_MOVIES_LIST_SCREEN + 1
 
+        const val MOVIES_DB = "MoviesDB"
+
         const val MOVIE_SHARING_DEEPLINK = "https://www.moviesdbapp.com/movie/"
     }
 }

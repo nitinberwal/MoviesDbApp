@@ -17,10 +17,6 @@ class MoviesDetailsViewModel(
     private var _detailsState = MutableStateFlow(DetailsState())
     val detailsState = _detailsState.asStateFlow()
 
-//    init {
-//        getMovie(movieId)
-//    }
-
     fun getMovie(movieId: Int?){
         viewModelScope.launch {
             _detailsState.update {

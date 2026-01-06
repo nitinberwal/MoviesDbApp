@@ -21,7 +21,6 @@ class MoviesRepositoryImpl(
         return flow {
             emit(DataStatus.Loading(true))
             val localData = moviesDb.getMoviesDao().getMoviesBasedOnCategory(category)
-            Log.d("nitin", "localData" + localData.toString())
 
             val shouldLoadLocalMovie = localData.isNullOrEmpty().not() && !forceFetchFromRemote
             if (shouldLoadLocalMovie) {
@@ -33,7 +32,6 @@ class MoviesRepositoryImpl(
             val moviesListFromApi = try {
                 moviesApi.getMoviesListBasedOnType("https://api.themoviedb.org/3/movie/popular", AppConstants.API_KEY, AppConstants.ACCEPT_TYPE, page)
             } catch (ex: Exception) {
-                Log.d("nitin", "exception ${ex}")
                 emit(DataStatus.Fail("Error while loading movies", null))
                 return@flow
             }
@@ -41,7 +39,6 @@ class MoviesRepositoryImpl(
             moviesListFromApi?.results?.forEach { currMovie ->
                 currMovie.category = category
             }
-            Log.d("nitin", moviesListFromApi.toString())
             moviesDb.getMoviesDao().insertMovies(moviesListFromApi?.results?:listOf())
             emit(DataStatus.Pass(moviesListFromApi?.results))
             emit(DataStatus.Loading(false))
@@ -84,22 +81,16 @@ class MoviesRepositoryImpl(
         return flow {
             val searchMovies = try {
                 moviesApi.searchMovies(
-                    "https://api.themoviedb.org/search/trending",
+                    "https://api.themoviedb.org/3/search/movie",
                     AppConstants.API_KEY,
                     AppConstants.ACCEPT_TYPE,
                     movieName
                 )
             } catch (ex: Exception) {
-                Log.d("nitin", "exception ${ex}")
+//                Log.d("nitin", "exception is ${ex}")
                 emit(DataStatus.Fail("Error while loading movies", null))
                 return@flow
             }
-
-//            searchMovies?.results?.forEach { currMovie ->
-//                currMovie.category = category
-//            }
-            Log.d("nitin", searchMovies.toString())
-//            moviesDb.getMoviesDao().insertMovies(moviesListFromApi?.results ?: listOf())
             emit(DataStatus.Pass(searchMovies?.results))
             emit(DataStatus.Loading(false))
         }

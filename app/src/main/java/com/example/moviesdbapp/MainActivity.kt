@@ -65,31 +65,9 @@ class MainActivity : ComponentActivity() {
                                 }
                             )) { backStackEntry ->
                             val movieId = backStackEntry.arguments?.getInt("movieId")
-                            Log.d("nitin", "movieId=${movieId}")
                             MovieDetailsScreen(movieId, backStackEntry, moviesDetailsViewModel)
                         }
                     }
-
-//                    MoviesListingScreen(
-////                        moviesList = moviesList.value,
-//                        modifier = Modifier.padding(innerPadding),
-//                        moviesViewModel
-//                    )
-//                    LaunchedEffect(key1 = null) {
-//                        scope.launch {
-//                            moviesViewModel.getMoviesListBasedOnType(
-//                                url = "now_playing",
-//                                auth = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0NzcyNTNhZTY1OWFkMWQ5MTQyZWI1Yjg3OTU1OTFlYiIsIm5iZiI6MTc2NzE2NDA3NC43OTQsInN1YiI6IjY5NTRjOGFhN2MxYzg3NDk2ZWMzODQ0YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.1nG4ITg4LDhz5scMG0_eTSocuVz70GoTFAc9yLHrJcc",
-//                                accept = "application/json"
-//                            )
-//                        }
-//                    }
-//                    LaunchedEffect(key1 = null) {
-//                        Handler().postDelayed({
-//                            Log.d("nitin", moviesViewModel.moviesList.toString())
-//                            moviesList.value = moviesList.value + moviesViewModel.moviesList.value
-//                        }, 5000)
-//                    }
                 }
             }
         }
@@ -101,75 +79,5 @@ private fun SetBarColor(color:Color){
     val systemUiController = rememberSystemUiController()
     LaunchedEffect(key1 = color) {
         systemUiController.setSystemBarsColor(color)
-    }
-}
-
-@Composable
-fun MoviesListingScreen(
-//    moviesList: List<Movie>,
-    modifier: Modifier = Modifier,
-    moviesViewModel: MoviesViewModel
-) {
-    val movies = listOf<Movie>()
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF5F5F5)),
-        contentPadding = PaddingValues(12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        items(movies.size) { index ->
-//            MovieItemUI(movies[index])
-        }
-
-        // Handle Loading and Error states
-//        when (val state = movies.loadState.append) {
-//            is LoadState.Loading -> {
-//                item { CircularProgressIndicator() }
-//            }
-//            is LoadState.Error -> {
-//                item { ErrorRetryButton(onClick = { movies.retry() }) }
-//            }
-//            else -> {}
-//        }
-//
-//        movies.apply {
-//            when (loadState.append) {
-//                is LoadState.Loading -> {
-//                    item {
-//                        CircularProgressIndicator(
-//                            modifier = Modifier.padding(16.dp)
-//                        )
-//                    }
-//                }
-//
-//                is LoadState.Error -> {
-//                    item {
-//                        Text(
-//                            text = "Error loading more movies",
-//                            modifier = Modifier.padding(16.dp)
-//                        )
-//                    }
-//                }
-//
-//                else -> Unit
-//            }
-//        }
-    }
-}
-
-@Composable
-fun ErrorRetryButton(onClick: () -> Unit) {
-    Text(text = "Reload", fontSize = 20.sp, color = Color.Black, modifier = Modifier.clickable{ onClick() })
-}
-
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MoviesDbAppTheme {
-//        Greeting("Android")
     }
 }

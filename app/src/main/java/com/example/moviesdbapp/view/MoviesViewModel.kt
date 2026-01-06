@@ -19,16 +19,6 @@ import kotlinx.coroutines.launch
 import java.util.Locale
 
 class MoviesViewModel(private val moviesRepository: MoviesRepository): ViewModel() {
-//    private val _moviesList = mutableStateOf<List<Movie>>(listOf())
-//    val moviesList: State<List<Movie>> = _moviesList
-
-//    suspend fun getMoviesListBasedOnType(url:String, auth:String, accept:String, page:Int = 1){
-//        _moviesList.value = moviesRepository.getMoviesListBasedOnType(url, auth, accept, page)?.results?:listOf()
-//    }
-//
-//    val movies = moviesRepository.getMovies()
-//        .cachedIn(viewModelScope)
-
     private var _movieListState = MutableStateFlow(MoviesListState())
     val movieListState: StateFlow<MoviesListState> = _movieListState.asStateFlow()
 

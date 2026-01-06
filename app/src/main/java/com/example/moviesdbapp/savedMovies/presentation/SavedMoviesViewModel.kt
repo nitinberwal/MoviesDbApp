@@ -1,5 +1,6 @@
 package com.example.moviesdbapp.savedMovies.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviesdbapp.domain.MoviesRepository
@@ -14,9 +15,9 @@ class SavedMoviesViewModel(private val moviesRepository: MoviesRepository): View
     private var _savedMoviesState = MutableStateFlow(MoviesState())
     val savedMoviesState = _savedMoviesState.asStateFlow()
 
-    init {
-        getSavedMovies()
-    }
+//    init {
+//        getSavedMovies()
+//    }
 
     fun getSavedMovies(){
         viewModelScope.launch {

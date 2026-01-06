@@ -50,7 +50,7 @@ android {
 
 dependencies {
 
-    implementation("androidx.compose.material:material-icons-extended:1.5.4")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
     
     // Room Paging
